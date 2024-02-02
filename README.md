@@ -8,6 +8,6 @@ Check Example in https://github.com/zimbra-api/soap-api
 fix change all NAME() to NAME
 
 Example:
-$account = $api->getAccountInfo(new AccountSelector(AccountBy::NAME, $accountName));
-or 
+$account = $api->getAccountInfo(new AccountSelector(AccountBy::NAME, $accountName));\n
+or\n
 $account = $api->getAccountInfo(new AccountSelector(AccountBy::NAME(), $accountName));
