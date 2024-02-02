@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  zimbra-api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: zimbra-api
+    restart: always
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    ports:
+      - '8800:80/tcp'
+    volumes:
+      - ./zimbra-api:/var/www/html/zimbra-api
