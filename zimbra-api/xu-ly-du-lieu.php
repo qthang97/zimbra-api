@@ -275,7 +275,7 @@ function changeQuota(string $id, $quota_input)
     $result_change_quota = $modify_account->getAccount()->getAttrList();
     foreach ($result_change_quota as $value) {
         if (($value->getKey()) == "zimbraMailQuota") {
-            $value->getValue() == $quota ? $message = $quota_input . "MB" : $message = "Thay đổi không thành công, đã có lỗi xảy ra";
+            $value->getValue() == $quota ? $message = $quota_input : $message = "Thay đổi không thành công, đã có lỗi xảy ra";
         }
     }
     return $message;
@@ -448,7 +448,7 @@ if (isset($_POST['reset_password'])) {
 
                         $password = $default_password_user;
                         $tmp = $tmp . '<td scope="col" >' . resetPassword($id, $password) . '</td>';
-                        $info[] = " - Email: " . $email;  
+                        $info[] = " - Đặt lại mật khẩu email: " . $email;  
                     } else {
                         $tmp = $tmp . '<td scope="col" >Không tìm thấy mail</td>';
                     }
@@ -506,6 +506,9 @@ if (isset($_POST['change_quota'])) {
                     </tr>
                 </thead>';
                 $i = 1;
+                $info[0] = "Thông tin gửi KH:";
+                $info[1]="1. Link truy cập vào địa chỉ mail: https://mail." .$server;
+                $info[2]="2. Thông tin các tài khoản đăng nhập:";
                 foreach ($email_arr as $email) {
                     //xoa khoang trang truoc va sau cua chuoi
                     $email = trim($email);
@@ -518,17 +521,20 @@ if (isset($_POST['change_quota'])) {
                     } else {
                         //kiem tra user co ton tai hay ko
                         if (check_account_status($email) == 1) {
-
                             //lay id cua user
                             $id = getID($email);
-                            $tmp = $tmp . '<td scope="col" >' . changeQuota($id, $quota_input) . '</td>';
+                            $result = changeQuota($id, $quota_input);
+                            $tmp = $tmp . '<td scope="col" >' . $result . 'MB</td>';
+                            $info[] = ' - Cập nhật: Đổi dung lượng email'. $email . ' thành ' . $result . 'MB';
                             $i = $i + 1;
                         } else {
                             $tmp = $tmp . '<td scope="col" >Không tìm thấy email</td>';
+
                         }
                     }
                 }
                 $message[] = $tmp . "</table>";
+                $message[] = join("</br>",$info);
             } else {
                 $message[] = "Vui lòng nhập dung lượng Quota";
             }
