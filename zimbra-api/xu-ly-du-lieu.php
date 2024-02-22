@@ -305,6 +305,7 @@ if (isset($_POST['create_account'])) {
         //kiem tra va gan du lieu
         isset($_POST['server']) ? $server = $_POST['server'] : false;
         isset($_POST['email_input']) ? $email_input = strtolower($_POST['email_input']) : false;
+        isset($_POST['quota_input']) ? $quota_input = $_POST['quota_input'] : $quota_input = 500;
 
         //dang nhap
         $username_admin = $username_admin . "@" . $server;
@@ -363,10 +364,18 @@ if (isset($_POST['create_account'])) {
                     }
                     $tmp = $tmp . '<tr><td scope="col" >' . $i . '</td>';
                     $tmp = $tmp . '<td scope="col" >' . $email . '</td>';
+
                     //tao tai khoan va tra ket qua tao tai khoan
                     $result_create_account = createAccount($email, $default_password_user);
                     $tmp = $tmp . '<td scope="col">' . $result_create_account . '</td>';
-                    $info[] = " - " .$result_create_account;
+                    if($quota_input == 500){
+                        $info[] = " - " .$result_create_account . " (500MB)";
+                    }else{
+                        //lay id cua user
+                        $id = getID($email);
+                        $info[] = " - Tạo: email " . $email . ' ('. changeQuota($id, $quota_input) .')';
+                    }
+                    
                     $i = $i + 1;
                 }
             }
