@@ -25,6 +25,7 @@ $(document).ready(function () {
         email_input = $.trim($('#email_input').val());
         username_admin = $('#username_admin').val();
         password_admin = $('#password_admin').val();
+        quota_input = $('#quota_input').val();
         $.ajax({
             type: "POST",
             url: url,
@@ -32,6 +33,7 @@ $(document).ready(function () {
                 create_account: "create_account",
                 email_input: email_input,
                 server: server,
+                quota_input: quota_input,
                 username_admin: username_admin,
                 password_admin: password_admin
             },
