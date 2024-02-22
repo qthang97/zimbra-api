@@ -525,7 +525,7 @@ if (isset($_POST['change_quota'])) {
                             $id = getID($email);
                             $result = changeQuota($id, $quota_input);
                             $tmp = $tmp . '<td scope="col" >' . $result . 'MB</td>';
-                            $info[] = ' - Cập nhật: Đổi dung lượng email'. $email . ' thành ' . $result . 'MB';
+                            $info[] = ' - Cập nhật: Đổi dung lượng email '. $email . ' thành ' . $result . 'MB';
                             $i = $i + 1;
                         } else {
                             $tmp = $tmp . '<td scope="col" >Không tìm thấy email</td>';
