@@ -26,6 +26,7 @@ $(document).ready(function () {
         username_admin = $('#username_admin').val();
         password_admin = $('#password_admin').val();
         quota_input = $('#quota_input').val();
+
         $.ajax({
             type: "POST",
             url: url,
