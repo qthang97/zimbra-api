@@ -23,17 +23,16 @@
 
                 <select class="form-control" id="server" name="server">
                     <option value="hcm.abc">test-site: hcm.abc</option>
-                    <option value="lab.xyz">test-site: lab.xyz</option>
-
+                    <option value="bizwebapi.com">bizwebapi.com</option>
                 </select>
                 <label for="username_admin">Username Admin:</label>
-                <input type="text" id="username_admin" name="username_admin" class="form-control" value="admin">
+                <input type="text" id="username_admin" name="username_admin" class="form-control">
                 <label for="password_admin">Password Admin:</label>
-                <input type="password" id="password_admin" name="password_admin" class="form-control" value="Aa1230456">
+                <input type="password" id="password_admin" name="password_admin" class="form-control">
             </div>
             <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-6">
                 <label for="email_input">Nhập danh sách các email/tên miền:</label>
-                <textarea class="form-control" id="email_input" name="email_input" cols="50" rows="10" value="a.com"></textarea>
+                <textarea class="form-control" id="email_input" name="email_input" cols="50" rows="10"></textarea>
             </div>
             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
                 <input class="form-check-input form-group" type="checkbox" id="enable_quota_input" name="enable_quota_input">
