@@ -232,12 +232,12 @@ function createAccount($username, $password)
     if (check_account_status($username) == 0) {
         $create_account = $api->createAccount($username, $password, [$attrDisplayName]);
         if ($create_account->getAccount()->getName() == $username) {
-            $message = "Tạo: email " . $username . " thành công";
+            $message = 1;
         } else {
-            $message = "Tạo: email " . $username . " thất bại, đã có lỗi xảy ra";
+            $message = 0;
         }
     } else {
-        $message = "Email " . $username . " đã tồn tại";
+        $message = -1;
     }
 
     return $message;
@@ -367,15 +367,22 @@ if (isset($_POST['create_account'])) {
 
                     //tao tai khoan va tra ket qua tao tai khoan
                     $result_create_account = createAccount($email, $default_password_user);
-                    $tmp = $tmp . '<td scope="col">' . $result_create_account . '</td>';
-                    if($quota_input == 500){
-                        $info[] = " - " .$result_create_account . " (500MB)";
+                    echo $quota_input;
+                    if($result_create_account == 1){
+                        $tmp = $tmp . '<td scope="col"> Tạo ' . $email . ' thành công</td>';
+                        if($quota_input != ""){
+                            //lay id cua user
+                            $id = getID($email);
+                            $info[] = " - Tạo: email " . $email . ' (' . changeQuota($id, $quota_input) . 'MB)';
+                            
+                        }else{
+                            $info[] = " - Tạo: email " . $email . " (500MB)";
+                        }
+                    }else if($result_create_account == -1){
+                        $tmp = $tmp . '<td scope="col"> Tài khoản ' . $email . ' đã tồn tại</td>';
                     }else{
-                        //lay id cua user
-                        $id = getID($email);
-                        $info[] = " - Tạo: email " . $email . ' ('. changeQuota($id, $quota_input) .')';
+                        $tmp = $tmp . '<td scope="col"> Tài khoản ' . $email . ' không thành công, đã có lỗi xảy ra</td>';
                     }
-                    
                     $i = $i + 1;
                 }
             }
