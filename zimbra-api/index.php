@@ -38,6 +38,12 @@
                 <input class="form-check-input form-group" type="checkbox" id="enable_quota_input" name="enable_quota_input">
                 <label class="form-check-label" for="enable_quota_input">Nhập Quota(MB):</label>
                 <input class="form-control" type="text" id="quota_input" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" disabled name="quota_input">
+                <br>
+                <p>Default Password:</p>
+                <select class="form-control" id="password" name="password">
+                    <option value="H4n0i@2o89">H4n0i@2o89</option>
+                    <option value="S@p0@$6868">S@p0@$6868</option>
+                </select>
             </div>
         </div>
         </br>
