@@ -294,7 +294,21 @@ function changeStatus(string $id, string $acction)
     return $change_status;
 }
 
+//tach chuoi email thanh array
+function convertStringToArray($email_input){
+    $arr = [];
+    $re = '/\S+@\S+\.\S+/m';
+    preg_match_all($re, $email_input, $email_arr_in_arr, PREG_SET_ORDER, 0);
 
+    $i = 0;
+    foreach($email_arr_in_arr as $value){
+        foreach($value as $email){
+            $arr[$i] = $email;
+            $i++; 
+        }
+    }
+    return $arr;
+}
 
 /*********************************************************************************************** */
 
@@ -304,6 +318,7 @@ if (isset($_POST['create_account'])) {
         unset($email_arr);
         //kiem tra va gan du lieu
         isset($_POST['server']) ? $server = $_POST['server'] : false;
+        isset($_POST['password']) ? $password = $_POST['password'] : $password = $default_password_user;
         isset($_POST['email_input']) ? $email_input = strtolower($_POST['email_input']) : false;
         isset($_POST['quota_input']) ? $quota_input = $_POST['quota_input'] : $quota_input = 500;
 
@@ -313,22 +328,10 @@ if (isset($_POST['create_account'])) {
 
         $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
-        
 
         //tach chuoi email thanh array
-        $para_to_arr = array_filter(explode(PHP_EOL, $email_input));
-        foreach ($para_to_arr as $line) {
-
-            $line_to_arr = array_filter(explode(" ", $line));
-            foreach ($line_to_arr as $email) {
-                //pr($email);
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $email_arr[] = $email;
-                }
-            }
-        }
-
-
+        $email_arr = convertStringToArray($email_input);
+        
         if (count($email_arr) != 0) {
             $tmp = '<table class="table ">
             <thead class="thead-dark">
@@ -346,7 +349,7 @@ if (isset($_POST['create_account'])) {
                 //xoa khoang trang truoc va sau cua chuoi
                 $email = trim($email);
 
-
+                
                 //kiem tra dinh dang mail
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $tmp = $tmp . '<td scope="col" >Sai định dạng mail</td>';
@@ -366,8 +369,7 @@ if (isset($_POST['create_account'])) {
                     $tmp = $tmp . '<td scope="col" >' . $email . '</td>';
 
                     //tao tai khoan va tra ket qua tao tai khoan
-                    $result_create_account = createAccount($email, $default_password_user);
-                    echo $quota_input;
+                    $result_create_account = createAccount($email, $password);
                     if($result_create_account == 1){
                         $tmp = $tmp . '<td scope="col"> Tạo ' . $email . ' thành công</td>';
                         if($quota_input != ""){
@@ -386,7 +388,7 @@ if (isset($_POST['create_account'])) {
                     $i = $i + 1;
                 }
             }
-            $info[] = "Mật khẩu: " . $default_password_user;
+            $info[] = "Mật khẩu: " . $password;
             $message[] = $tmp . "</table>";
             $message[] = join("</br>",$info);
         } else {
@@ -404,6 +406,7 @@ if (isset($_POST['reset_password'])) {
         //kiem tra va gan du lieu
         isset($_POST['server']) ? $server = $_POST['server'] : false;
         isset($_POST['email_input']) ? $email_input = strtolower($_POST['email_input']) : false;
+        isset($_POST['password']) ? $password = $_POST['password'] : $password = $default_password_user;
         //dang nhap
 
         $username_admin = $username_admin . "@" . $server;
@@ -413,17 +416,7 @@ if (isset($_POST['reset_password'])) {
         $api->auth($username_admin, $password_admin);
 
         //tach chuoi email thanh array
-        $para_to_arr = array_filter(explode(PHP_EOL, $email_input));
-        foreach ($para_to_arr as $line) {
-
-            $line_to_arr = array_filter(explode(" ", $line));
-            foreach ($line_to_arr as $email) {
-                //pr($email);
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $email_arr[] = $email;
-                }
-            }
-        }
+        $email_arr = convertStringToArray($email_input);
 
         if (count($email_arr) != 0) {
             $tmp = '<table class="table ">
@@ -453,8 +446,8 @@ if (isset($_POST['reset_password'])) {
                         //lay id cua user
                         $id = getID($email);
 
-                        $password = $default_password_user;
                         $tmp = $tmp . '<td scope="col" >' . resetPassword($id, $password) . '</td>';
+                        
                         $info[] = " - Đặt lại mật khẩu email: " . $email;  
                     } else {
                         $tmp = $tmp . '<td scope="col" >Không tìm thấy mail</td>';
@@ -490,17 +483,7 @@ if (isset($_POST['change_quota'])) {
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
 
         //tach chuoi email thanh array
-        $para_to_arr = array_filter(explode(PHP_EOL, $email_input));
-        foreach ($para_to_arr as $line) {
-
-            $line_to_arr = array_filter(explode(" ", $line));
-            foreach ($line_to_arr as $email) {
-                //pr($email);
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $email_arr[] = $email;
-                }
-            }
-        }
+        $email_arr = convertStringToArray($email_input);
 
         if (count($email_arr) != 0) {
             if ($quota_input != "") {
@@ -606,17 +589,7 @@ if (isset($_POST['enable_account'])) {
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
 
         //tach chuoi email thanh array
-        $para_to_arr = array_filter(explode(PHP_EOL, $email_input));
-        foreach ($para_to_arr as $line) {
-
-            $line_to_arr = array_filter(explode(" ", $line));
-            foreach ($line_to_arr as $email) {
-                //pr($email);
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $email_arr[] = $email;
-                }
-            }
-        }
+        $email_arr = convertStringToArray($email_input);
 
         if (count($email_arr) != 0) {
             $tmp = '<table class="table ">
@@ -688,17 +661,7 @@ if (isset($_POST['disable_account'])) {
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
 
         //tach chuoi email thanh array
-        $para_to_arr = array_filter(explode(PHP_EOL, $email_input));
-        foreach ($para_to_arr as $line) {
-
-            $line_to_arr = array_filter(explode(" ", $line));
-            foreach ($line_to_arr as $email) {
-                //pr($email);
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $email_arr[] = $email;
-                }
-            }
-        }
+        $email_arr = convertStringToArray($email_input);
 
         if (count($email_arr) != 0) {
             $tmp = '<table class="table ">
