@@ -26,7 +26,7 @@ $(document).ready(function () {
         username_admin = $('#username_admin').val();
         password_admin = $('#password_admin').val();
         quota_input = $('#quota_input').val();
-
+        password = $('#password').val();
         $.ajax({
             type: "POST",
             url: url,
@@ -36,7 +36,8 @@ $(document).ready(function () {
                 server: server,
                 quota_input: quota_input,
                 username_admin: username_admin,
-                password_admin: password_admin
+                password_admin: password_admin,
+                password: password
             },
             success: function (data) {
                 $("#message").html(data);
@@ -51,6 +52,7 @@ $(document).ready(function () {
         email_input = $.trim($('#email_input').val());
         username_admin = $('#username_admin').val();
         password_admin = $('#password_admin').val();
+        password = $('#password').val();
         $.ajax({
             type: "POST",
             url: url,
@@ -59,7 +61,8 @@ $(document).ready(function () {
                 email_input: email_input,
                 server: server,
                 username_admin: username_admin,
-                password_admin: password_admin
+                password_admin: password_admin,
+                password:password
             },
             success: function (data) {
                 $("#message").html(data);
