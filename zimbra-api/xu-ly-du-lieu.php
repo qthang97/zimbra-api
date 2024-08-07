@@ -455,7 +455,7 @@ if (isset($_POST['reset_password'])) {
                 }
                 $i = $i + 1;
             }
-            $info[] = "Mật khẩu: " . $default_password_user;
+            $info[] = "Mật khẩu: " . $password;
             $message[] = $tmp . "</table>";
             $message[] = join("</br>",$info);
         } else {
