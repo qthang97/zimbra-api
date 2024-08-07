@@ -326,7 +326,7 @@ if (isset($_POST['create_account'])) {
         $username_admin = $username_admin . "@" . $server;
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
 
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
 
         //tach chuoi email thanh array
@@ -343,7 +343,7 @@ if (isset($_POST['create_account'])) {
             </thead>';
             $i = 1;
             $info[0] = "Thông tin gửi KH:";
-            $info[1]="1. Link truy cập vào địa chỉ mail: https://mail." .$server;
+            $info[1]="1. Link truy cập vào địa chỉ mail: https://" .$server;
             $info[2]="2. Thông tin các tài khoản đăng nhập:";
             foreach ($email_arr as $email) {
                 //xoa khoang trang truoc va sau cua chuoi
@@ -412,7 +412,7 @@ if (isset($_POST['reset_password'])) {
         $username_admin = $username_admin . "@" . $server;
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
 
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
 
         //tach chuoi email thanh array
@@ -429,7 +429,7 @@ if (isset($_POST['reset_password'])) {
             </thead>';
             $i = 1;
             $info[0] = "Thông tin gửi KH:";
-            $info[1]="1. Link truy cập vào địa chỉ mail: https://mail." .$server;
+            $info[1]="1. Link truy cập vào địa chỉ mail: https://" .$server;
             $info[2]="2. Thông tin các tài khoản đăng nhập:";
             foreach ($email_arr as $email) {
                 //xoa khoang trang truoc va sau cua chuoi
@@ -477,7 +477,7 @@ if (isset($_POST['change_quota'])) {
 
         //dang nhap
         $username_admin = $username_admin . "@" . $server;
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
 
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
@@ -497,7 +497,7 @@ if (isset($_POST['change_quota'])) {
                 </thead>';
                 $i = 1;
                 $info[0] = "Thông tin gửi KH:";
-                $info[1]="1. Link truy cập vào địa chỉ mail: https://mail." .$server;
+                $info[1]="1. Link truy cập vào địa chỉ mail: https://" .$server;
                 $info[2]="2. Thông tin các tài khoản đăng nhập:";
                 foreach ($email_arr as $email) {
                     //xoa khoang trang truoc va sau cua chuoi
@@ -546,7 +546,7 @@ if (isset($_POST['get_list_accounts'])) {
 
         //dang nhap
         $username_admin = $username_admin . "@" . $server;
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
         $message[] = print_accounts_list($domain, $server);
     } else {
@@ -563,7 +563,7 @@ if (isset($_POST['changestatus'])) {
 
     //dang nhap
     $username_admin = $username_admin . "@" . $server;
-    $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+    $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
     $api->auth($username_admin, $password_admin);
 
     $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
@@ -583,7 +583,7 @@ if (isset($_POST['enable_account'])) {
 
         //dang nhap
         $username_admin = $username_admin . "@" . $server;
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
 
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
@@ -655,7 +655,7 @@ if (isset($_POST['disable_account'])) {
 
         //dang nhap
         $username_admin = $username_admin . "@" . $server;
-        $api = new AdminApi('https://mail.' . $server . ':7071/service/admin/soap');
+        $api = new AdminApi('https://' . $server . ':7071/service/admin/soap');
         $api->auth($username_admin, $password_admin);
 
         $message[] = '<div class="blog-header py-3"><h3 class="blog-header-logo text-dark">Server: mail.' . $server . '</h3></div>';
