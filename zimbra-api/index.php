@@ -22,8 +22,8 @@
                 <label for="server">Chọn Server:</label>
 
                 <select class="form-control" id="server" name="server">
-                    <option value="hcm.abc">test-site: hcm.abc</option>
-                    <option value="bizwebapi.com">bizwebapi.com</option>
+                    <option value="mail.hcm.abc">test-site: mail.hcm.abc</option>
+                    <option value="old.bizwebapi.com">old.bizwebapi.com</option>
                 </select>
                 <label for="username_admin">Username Admin:</label>
                 <input type="text" id="username_admin" name="username_admin" class="form-control">
@@ -42,6 +42,7 @@
                 <p>Default Password:</p>
                 <select class="form-control" id="password" name="password">
                     <option value="H4n0i@2o89">H4n0i@2o89</option>
+                    <option value="S@p0@6868">S@p0@6868</option>
                     <option value="S@p0@$6868">S@p0@$6868</option>
                 </select>
             </div>
